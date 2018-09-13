@@ -1,0 +1,47 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "com.dthfish.hotfixdemo"
+        minSdkVersion 14
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+}
+
+// 修复的类
+def patchPath = 'com/dthfish/hotfixdemo/Util'
+
+task hotfix {
+    doLast {
+        exec {
+            commandLine 'rm', '-r', './build/patch'
+        }
+        exec {
+            commandLine 'mkdir', './build/patch'
+        }
+        exec {
+            commandLine 'javac', '-source', '1.6', '-target', '1.6', "./src/main/java/${patchPath}.java", '-d', './build/patch'
+        }
+        // 这里的路径需要填写自己的主要是用 build-tools 里面的 dx 生成 dex 文件
+        exec {
+            commandLine '/Users/zhaolizhi/Library/Android/sdk/build-tools/27.0.3/dx', '--dex', '--output=./build/patch/classes.dex', "./build/patch"
+        }
+        exec {
+            commandLine 'mv', "./build/patch/classes.dex", './build/patch/hotfix.dex'
+        }
+    }
+}

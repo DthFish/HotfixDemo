@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:padding="10dp"
+        android:text="Hello World!"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/btn_set_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="设置文字" />
+
+    <Button
+        android:id="@+id/btn_hotfix"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="加载补丁" />
+    <Button
+        android:id="@+id/btn_delete_hotfix"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="删除补丁" />
+
+    <Button
+        android:id="@+id/btn_kill_self"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="杀死进程" />
+
+</LinearLayout>
